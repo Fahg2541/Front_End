@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <button onclick="show_table()">show</button>
+    </p>
+
+    <p id="tbl_show"></p>
+    
+
+    <script>
+        show_table = () => {
+            var xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let parser, xmlDoc, txt_html;
+                    parser = new DOMParser();
+                    xmlDoc = parser.parseFromString(this.responseText, 'text/xml');
+                    txt_html = '<table border = "1">';
+                    txt_html += '<tr>' +
+                                    '<th>culture_id</th>'+
+                                    '<th>culture_name</th>'+
+                                    '<th>detail</th>'+
+                                    '<th>east</th>'+
+                                    '<th>north</th>'+
+                                    '<th>type</th>'+
+                                '</tr>'
+
+                    // let objs = xmlDoc.getElementsByTagName('culture_name');
+                    // let ids = xmlDoc.getElementsByTagName('culture_id');
+                    // let details = xmlDoc.getElementsByTagName('detail');
+                    // let easts = xmlDoc.getElementsByTagName('east');
+                    // let norths = xmlDoc.getElementsByTagName('north');
+                    // let types =xmlDoc.getElementsByTagName('type');
+
+                    let objs = xmlDoc.documentElement.childNodes; 
+
+                    for(let i = 0; i < objs.length; i++){
+                        txt_html += '<tr>' +
+                                        '<th>'+xmlDoc.getElementsByTagName('culture_id')[i].childNodes[0].nodeValue+'</th>'+
+                                        '<th>'+xmlDoc.getElementsByTagName('culture_name')[i].childNodes[0].nodeValue+'</th>'+
+                                        '<th>'+xmlDoc.getElementsByTagName('detail')[i].childNodes[0].nodeValue+'</th>'+
+                                        '<th>'+xmlDoc.getElementsByTagName('east')[i].childNodes[0].nodeValue+'</th>'+
+                                        '<th>'+xmlDoc.getElementsByTagName('north')[i].childNodes[0].nodeValue+'</th>'+
+                                        '<th>'+xmlDoc.getElementsByTagName('type')[i].childNodes[0].nodeValue+'</th>'
+                                    '</tr>';
+
+                        // console.log(objs[i].childNodes[0].nodeValue);
+                        // console.log(ids[i].childNodes[0].nodeValue);
+                    }
+                
+                txt_html += '</table>';
+
+                document.getElementById('tbl_show').innerHTML = txt_html; 
+
+            }  
+        };
+        xmlhttp.open("GET", "http://culture.tpk-learning.site/xml_data.php", true);
+        xmlhttp.send();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>
+        <button onclick="show_table()">show</button>
+    </p>
+
+    <p id="tbl_show"></p>
+
+    <script>
+
+        show_table = () => {
+            let xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    let objs = JSON.parse(this.responseText);
+                    let txt_html = '<table border = "1">';
+                        txt_html += '<tr>' + 
+                                        '<th>culture_id</th>'+
+                                        '<th>culture_name</th>'+
+                                        '<th>detail</th>'+
+                                        '<th>east</th>'+
+                                        '<th>north</th>'+
+                                        '<th>type</th>'+
+                                    '</tr>';
+                    // console.log(objs[i].culture_name);
+                    // console.log(objs[i].culture_id);
+
+                    for(let i = 0; i < objs.length; i++){
+                        txt_html += '<tr>' + 
+                                        '<td>'+objs[i].culture_id+'</td>'+
+                                        '<td>'+objs[i].culture_name+'</td>'+
+                                        '<td>'+objs[i].detail+'</td>'+
+                                        '<td>'+objs[i].east+'</td>'+
+                                        '<td>'+objs[i].north+'</td>'+
+                                        '<td>'+objs[i].type+'</td>'+
+                                    '</tr>';
+
+                    }
+                    txt_html += '</table>';
+
+                    document.getElementById('tbl_show').innerHTML = txt_html;
+                }
+            };
+        xmlhttp.open("GET", "http://culture.tpk-learning.site/json_data.php", true);
+        xmlhttp.send();
+        }
+        
+    </script>
+</body>
+</html>
