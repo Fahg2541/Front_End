@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab01</title>
+    <!-- CSS -->
+    <script>
+        // สเปดแอนด์เรท
+        // var firstname = ['max', 'john'];  
+        // var name2 = [...firstname]; // copy 
+        // name2[1] = 'tumtpk';
+        // console.log(firstname, name2);
+
+        //Destructuring
+        // var firstname = ['max', 'john'];
+        // var [firstname1, firstname2] = firstname; 
+        // console.log(firstname1, firstname2);
+
+        //conts name = 'max'; ค่าคงที่
+        // var age = 26;
+        // let gender ='F';
+        // alert('Hello World'); ป๊อปอัพ
+
+        // let x = 20;
+        // console.log(x);
+
+    </Script>
+</head>
+<body>
+    <input type="number" name="num1" id="num1" value="" onchange="input1()"><br/>
+    <input type="text" name="operatorss" id="operatorss" value="" onchange="operators()"><br/>
+    <input type="number" name="num2" id="num2" value="" onchange="input2()">
+    <h1 id="result">number</h1>
+
+    <script>
+        let x = 0,y = 0, operator = "";
+        function input1(){
+            x = document.getElementById('num1').value; //ใช่ได้เฉพาะกับที่มีค่า value
+            sum();
+            console.log(x);
+        }
+
+        function input2(){
+            y = document.getElementById('num2').value; //ใช่ได้เฉพาะกับที่มีค่า value
+            sum();
+            console.log(y);
+        }
+
+        function operators(){
+            operator = document.getElementById('operatorss').value;
+            sum();
+
+        }
+
+        function sum(){
+            // check 3 param
+            if(x && operator && y){
+                if(operator == "+"){
+                    document.getElementById("result").innerHTML = parseInt(x)+parseInt(y);     
+                }
+                else if(operator == "-"){
+                    document.getElementById("result").innerHTML = parseInt(x)-parseInt(y);
+                }
+                else if(operator == "*"){
+                    document.getElementById("result").innerHTML = parseInt(x)*parseInt(y);
+                }
+                else if(operator == "/"){
+                    document.getElementById("result").innerHTML = parseInt(x)/parseInt(y);
+                }
+            }
+            else{
+                    document.getElementById("result").innerHTML = "Error please enter all information!!!"
+                }
+
+            // result
+            // document.getElementById("result").innerHTML = parseInt(x)+parseInt(y);
+        }
+    </script>
+</body>
+</html>
