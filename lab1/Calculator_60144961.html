@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .text-center
+        {
+            text-align: center;
+        }
+    .text-right
+        {
+            text-align: right;
+        }
+    .text-left
+        {
+            text-align: left;
+        }
+    .border
+        {
+            border: 1px solid #b7b7b7;
+            border-radius: 5px;
+            padding: 10px;
+        }
+    .btn
+        {
+            width: 100%;
+            background: #e4e4e4;
+            height: 30px;
+            border: 1px solid #dadce0;
+            border-radius: 3px;
+            color: #202124;
+        }
+    .btn-primary
+        {
+            background: #4285f4;
+            border: 1px solid #4285f4;
+            color: white;
+        }
+    .btn-default
+        {
+            background: #f1f3f4;
+            border: 1px solid #f1f3f4;;
+            color: #202124;
+        }
+    .mg-1
+        {
+            margin: 1px;
+        }
+</style>
+<body>
+    <table width = "50%" class="text-center border">
+        <tr>
+            <td colspan="4" class="border">
+                <p class="text-left mg-1" id="screen">0</p>
+                <p class="text-right mg-1">0</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="4">
+                <button class="btn" onclick="CleanCalculate('')">AC</button>
+            </td>
+        </tr>
+
+        <tr>
+            <td><button class="btn btn-default" onclick="addNumber('7')">7</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('8')">8</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('9')">9</button></td>
+            <td><button class="btn" onclick="addOperator('÷')">÷</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btn btn-default" onclick="addNumber('4')">4</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('5')">5</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('6')">6</button></td>
+            <td><button class="btn" onclick="addOperator('×')">×</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btn btn-default" onclick="addNumber('1')">1</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('2')">2</button></td>
+            <td><button class="btn btn-default" onclick="addNumber('3')">3</button></td>
+            <td><button class="btn" onclick="addOperator('-')">-</button></td>
+        </tr>
+
+        <tr>
+            <td><button class="btn btn-default" onclick="addNumber(0)">0</button></td>
+            <td colspan="2"><button class="btn btn-primary" onclick="sum('')">=</button></td>
+            <td><button class="btn" onclick="addOperator('+')">+</button></td>
+        </tr>
+        
+        <script>
+            let screen = '';
+            let x = '', y = '', operator = '', result = '';
+            let position = 1;
+
+            addNumber = (n) => {
+                if(position == 1){
+                    x+=n;
+                }
+
+                if(position == 2){
+                    y+=n;
+                }
+                
+                screen += n;
+                showScreen();
+                // console.log(n);
+            }
+
+            addOperator = (op) => {
+                operator = op;
+                screen += operator;
+                position = 2;
+                showScreen();
+            }
+
+            showScreen = () => {
+                document.getElementById('screen').innerHTML = screen;
+            }
+
+            CleanCalculate = () =>{
+                x = '', y = '';
+                position = 1;
+                screen = '';
+                result = '';
+                document.getElementById('screen').innerHTML = '0';
+                document.getElementById('result').innerHTML = '0';
+            }
+
+            sum = () =>{
+            // check 3 param
+                if(operator == "+"){
+                    document.getElementById("screen").innerHTML = parseInt(x) + parseInt(y);     
+                }
+                else if(operator == "-"){
+                    document.getElementById("screen").innerHTML = parseInt(x) - parseInt(y);
+                }
+                else if(operator == "*"){
+                    document.getElementById("screen").innerHTML = parseInt(x) * parseInt(y);
+                }
+                else if(operator == "/"){
+                    document.getElementById("screen").innerHTML = parseInt(x) / parseInt(y);
+                }
+            }
+            // else{
+            //         document.getElementById("result").innerHTML = "Error please enter all information!!!"
+            //     }
+
+            // result
+            // document.getElementById("result").innerHTML = parseInt(x)+parseInt(y);
+        </script>
+</body>
+</html>
