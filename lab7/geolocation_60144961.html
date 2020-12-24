@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+</head>
+<body onload="getPosition()">
+    
+    <div class="row">
+        <div class="col-6">
+            <!-- <h2 id=position></h2> -->
+            <table class="table table-bordered">
+                <tr>
+                    <th>ชื่อสถานที่</th>
+                </tr>
+                <tbody id="position"></tbody>
+            </table>
+        </div>
+        <div class="col-6">
+            <iframe width="600" height="500" name="gmap_canvas" id="gmap_canvas" src="https://maps.google.com/maps?q=8,100&z=12&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+        </div>
+    </div>
+    <script>
+
+        let position_id = document.getElementById('position');
+        getPosition = () => {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else { 
+                position_id.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        showPosition = (position) => {
+            // position_id.innerHTML = "Latitude: " + position.coords.latitude + 
+            //                         "<br>Longitude: " + position.coords.longitude;
+            let current_position = 'https://maps.google.com/maps?q='+ position.coords.latitude +','+ position.coords.longitude +'&z=12&ie=UTF8&iwloc=&output=embed';
+            document.getElementById('gmap_canvas').src = current_position;
+            showPlace();
+        }
+
+        showPlace = () => {
+            let places = [
+                {
+                    name: "วลัยลักษณ์",
+                    latitude: 8.641668813929275,
+                    longitude: 99.89737555454138
+                },
+
+                {
+                    name: "วัดใหญ่ชัยมงคล",
+                    latitude: 14.34523269849108,
+                    longitude: 100.59312415225234
+                },
+
+                {
+                    name: "จุดชมวิวคีรีวง",
+                    latitude: 8.443264461838691,
+                    longitude: 99.78209890825593
+                },
+
+                {
+                    name: "โรงเรียนบ้านโนนฐานะ",
+                    latitude: 17.47011220323003,
+                    longitude: 102.55260897969451
+                },
+
+                {
+                    name: "จุดชมวิวทะเลหมอกภูหนอง",
+                    latitude: 18.206206804138567,
+                    longitude: 102.12568255462469
+                },
+                
+                {
+                    name: "วัดเจดีย์สามยอด",
+                    latitude: 18.503612552930438,
+                    longitude: 98.8643684880777
+                },
+
+                {
+                    name: "น้ำตกเอราวัณ",
+                    latitude: 14.368686111928318,
+                    longitude: 99.1439938464702
+                },
+
+                {
+                    name: "วัดพระมหาธาตุวรมหาวิหาร",
+                    latitude: 8.411243167093357,
+                    longitude: 99.96614572570498
+                },
+
+                {
+                    name: "วัดเจดีย์(ไอ้ไข่)",
+                    latitude: 8.911237894276608,
+                    longitude: 99.84759475454256
+                },
+
+                {
+                    name: "หาดในเพลา",
+                    latitude: 9.133036218062491,
+                    longitude: 99.87838454325482
+                }
+            
+            ];
+            let html = '';
+            places.forEach(p => {
+                html += '<tr><td>';
+                let current_position = 'https://maps.google.com/maps?q='+ p.latitude +','+ p.longitude +'&z=12&ie=UTF8&iwloc=&output=embed';
+                html += '<a href="'+current_position+'"target="gmap_canvas">'+p.name+'</a>';
+                html += '</td></tr>';
+            });
+            document.getElementById('position').innerHTML = html  
+        }
+        
+    </script>
+</body>
+</html>
